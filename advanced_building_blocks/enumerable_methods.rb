@@ -39,6 +39,20 @@ module Enumerable
     end
     return false
   end
+
+  def my_count(element= nil)
+    counter = 0
+    self.my_each do |x|
+      if block_given?
+        counter += 1 if yield x
+      elsif element
+        return self[element-1]
+      else
+        return self.count
+      end
+    end
+    counter
+  end
 end
 
 [0,1,2].my_each { |x| puts x}
@@ -47,3 +61,5 @@ end
 [2,2,2].my_all? { |x| x%2 ==0}
 [2,2,2].my_any? { |x| x%2 ==0}
 [2,2,2].my_none? { |x| x%3 ==0}
+[1, 2, 4, 2].my_count
+[1, 2, 4, 2].count(2)
