@@ -18,8 +18,16 @@ module Enumerable
     end
     ans
   end
+
+  def my_all
+    self.my_each do |x|
+      return false unless yield x
+    end
+    return true
+  end
 end
 
 [0,1,2].my_each { |x| puts x}
 [5,1,2,4].my_each_with_index { |x,y| puts "#{x} and #{y}"}
 [5,1,2,4].my_select { |x| x%2 ==0}
+[5,1,2,4].my_all { |x| x%2 ==0}
