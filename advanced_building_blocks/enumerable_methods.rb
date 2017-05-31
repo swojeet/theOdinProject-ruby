@@ -53,6 +53,14 @@ module Enumerable
     end
     counter
   end
+
+  def my_map
+    ans = []
+    self.my_each do |x|
+      ans << (yield x)
+    end
+  ans
+  end
 end
 
 [0,1,2].my_each { |x| puts x}
@@ -63,3 +71,4 @@ end
 [2,2,2].my_none? { |x| x%3 ==0}
 [1, 2, 4, 2].my_count
 [1, 2, 4, 2].count(2)
+[1, 2, 4, 2].my_map {|i| i*i } 
