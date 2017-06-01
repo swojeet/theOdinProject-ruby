@@ -61,6 +61,20 @@ module Enumerable
     end
   ans
   end
+
+  def my_inject(value = false)
+  	if (value == false)
+  	  value = self[0]
+  	  for x in 1...self.length do
+    	  value = yield value, self[x]
+    	end
+  	else
+      self.my_each do |x|
+  	    value = yield value, x
+  	  end
+  	end
+  	value
+  end
 end
 
 [0,1,2].my_each { |x| puts x}
@@ -71,4 +85,5 @@ end
 [2,2,2].my_none? { |x| x%3 ==0}
 [1, 2, 4, 2].my_count
 [1, 2, 4, 2].count(2)
-[1, 2, 4, 2].my_map {|i| i*i } 
+[1, 2, 4, 2].my_map {|i| i*i }
+[5,6,7,8,9,10].my_inject(5){|sum, n| sum + n } 
