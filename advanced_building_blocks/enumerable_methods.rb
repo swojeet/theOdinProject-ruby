@@ -54,18 +54,16 @@ module Enumerable
     counter
   end
 
-  def my_map
+  def my_map(some_proc = nil)
     ans = []
-    self.my_each do |x|
-      ans << (yield x)
-    end
-  ans
-  end
-
-  def my_map_proc(some_proc)
-    ans = []
-    self.my_each do |x|
-      ans << some_proc.call(x)
+    if block_given?
+      self.my_each do |x|
+        ans << (yield x)
+      end
+    else
+      self.my_each do |x|
+        ans << some_proc.call(x)
+      end
     end
     ans
   end
@@ -102,5 +100,5 @@ end
 multiply_els([2,4,5])
 
 b = Proc.new{|i| i*i }
-[1, 2, 4, 2].my_map_proc(b)
-
+[1, 2, 4, 2].my_map(b)
+[1, 2, 4, 2].my_map {|i| i*i }
