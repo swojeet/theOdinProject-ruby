@@ -62,6 +62,14 @@ module Enumerable
   ans
   end
 
+  def my_map_proc(some_proc)
+    ans = []
+    self.my_each do |x|
+      ans << some_proc.call(x)
+    end
+    ans
+  end
+
   def my_inject(value = false)
   	if (value == false)
   	  value = self[0]
@@ -92,3 +100,7 @@ end
 [1, 2, 4, 2].my_map {|i| i*i }
 [5,6,7,8,9,10].my_inject(5){|sum, n| sum + n } 
 multiply_els([2,4,5])
+
+b = Proc.new{|i| i*i }
+[1, 2, 4, 2].my_map_proc(b)
+
