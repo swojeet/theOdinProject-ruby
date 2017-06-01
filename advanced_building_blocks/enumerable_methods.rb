@@ -77,6 +77,10 @@ module Enumerable
   end
 end
 
+def multiply_els(array)
+  array.my_inject(1){|product, elem| product * elem}
+end
+
 [0,1,2].my_each { |x| puts x}
 [5,1,2,4].my_each_with_index { |x,y| puts "#{x} and #{y}"}
 [5,1,2,4].my_all? { |x| x%2 ==0}
@@ -87,3 +91,4 @@ end
 [1, 2, 4, 2].count(2)
 [1, 2, 4, 2].my_map {|i| i*i }
 [5,6,7,8,9,10].my_inject(5){|sum, n| sum + n } 
+multiply_els([2,4,5])
